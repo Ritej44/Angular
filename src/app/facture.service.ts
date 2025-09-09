@@ -8,7 +8,7 @@ import { Fournisseur } from './Fournisseur.model';
   providedIn: 'root'
 })
 export class FactureService {
-  private apiUrl = 'https://springboot-production-6575.up.railway.app/api/factures';
+  private apiUrl = 'http://localhost:8080/api/factures';
 
   constructor(private http: HttpClient) { }
 
@@ -52,7 +52,7 @@ export class FactureService {
   return this.http.post<Facture>(`${this.apiUrl}/factures/${id}/payer`, { notePaiement, devise });
 }
 
-  private apiurl = 'https://springboot-production-6575.up.railway.app/api/paiement';
+  private apiurl = 'http://localhost:8080/api/paiement';
 updatePaiement(id: string, paiement: any): Observable<any> {
     return this.http.put(`${this.apiurl}/${id}`, paiement);
   }
