@@ -103,7 +103,7 @@ openPaiementModal(facture: any) {
   this.showPaiementModal = true;
 }
 confirmPaiement() {
-  const url = `https://springboot-production-6575.up.railway.app/api/factures/${this.currentFactureID}/payer`;
+  const url = `http://localhost:8080/api/factures/${this.currentFactureID}/payer`;
   const body = {
     notePaiement: this.notePaiement,
     devise: this.selectedDevise
@@ -134,7 +134,7 @@ confirmPaiement() {
 }
 
 getAllFournisseurs() {
-  this.http.get<Fournisseur[]>('https://springboot-production-6575.up.railway.app/api/fournisseurs')
+  this.http.get<Fournisseur[]>('http://localhost:8080/api/fournisseurs')
     .subscribe(fournisseurs => {
       this.fournisseurs = fournisseurs;
       console.log('Fournisseurs chargés :', this.fournisseurs); // Debug
@@ -143,7 +143,7 @@ getAllFournisseurs() {
 
 getSoldes(): void {
   this.isLoading = true;
-  this.http.get<any>('https://springboot-production-6575.up.railway.app/api/paiement/getAll')
+  this.http.get<any>('http://localhost:8080/api/paiement/getAll')
     .subscribe(
       (response) => {
         console.log("Soldes récupérés :", response);
