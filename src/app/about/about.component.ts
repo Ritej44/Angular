@@ -182,7 +182,7 @@ isLoading: boolean = false;
   getAllFactures() {
   console.log("Début de la récupération des factures");
 
-  this.http.get("https://springboot-production-6575.up.railway.app/api/factures/getAll")
+  this.http.get("http://localhost:8080/api/factures/getAll")
     .subscribe((resultData: any) => {
       console.log("Factures reçues:", resultData);
 
