@@ -204,7 +204,7 @@ isLoading: boolean = false;
         console.log(`Requête pour fournisseur ID: ${fournisseurId}`);
         
         // Utiliser responseType: 'json' et extraire le nom
-        return this.http.get<any>(`https://springboot-production-6575.up.railway.app/api/fournisseurs/nom/${fournisseurId}`)
+        return this.http.get<any>(`http://springboot-production-6575.up.railway.app/api/fournisseurs/nom/${fournisseurId}`)
           .pipe(
             map(response => response.nom), // Extraire seulement le nom
             catchError(error => {
@@ -236,7 +236,7 @@ exportToExcel() {
     'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
   });
 
-  this.http.get('https://springboot-production-6575.up.railway.app/api/factures/export/excel', {
+  this.http.get('http://springboot-production-6575.up.railway.app/api/factures/export/excel', {
     headers: headers,
     responseType: 'blob',
     observe: 'response'
@@ -312,7 +312,7 @@ exportToExcel() {
     idFournisseur: fournisseurId,
    };
 
-  this.http.post("https://springboot-production-6575.up.railway.app/api/factures/create", factureData)
+  this.http.post("http://springboot-production-6575.up.railway.app/api/factures/create", factureData)
     .subscribe(
       (resultData: any) => {
         console.log(resultData);
