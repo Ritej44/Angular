@@ -28,12 +28,12 @@ export class FactureService {
 
   // Factures NON PAYÉES
   getFacturesNonPayees(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/non-payees`);
+    return this.http.get<any[]>(`${this.apiUrl}/factures/non-payees`);
   }
 
   // Factures PAYÉES
   getFacturesPayees(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/paye`);
+    return this.http.get<any[]>(`${this.apiUrl}/factures/paye`);
   }
 
   // Par statut
@@ -54,9 +54,8 @@ export class FactureService {
   return this.http.post<Facture>(`${this.apiUrl}/factures/${id}/payer`, { notePaiement, devise });
 }
 
-  private apiurl = 'http://localhost:8080/api/paiement';
 updatePaiement(id: string, paiement: any): Observable<any> {
-    return this.http.put(`${this.apiurl}/${id}`, paiement);
+    return this.http.put(`${this.apiUrl}/paiement/${id}`, paiement);
   }
 
   updateFacture(id: string, facture: Facture): Observable<Facture> {

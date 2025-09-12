@@ -11,6 +11,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Paiement } from '../paiement.model';
+import { environment } from 'src/environments/environment.staging';
 
 
 @Component({
@@ -44,6 +45,7 @@ updateEURO: number = 0;
   @Output() close = new EventEmitter<void>();
   paiement: any = { soldeDT: 0, soldeEURO: 0 }; 
 
+  private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient,    private fb: FormBuilder,
     private route: ActivatedRoute
 ,private cdRef:ChangeDetectorRef, private toastr :ToastrService
@@ -103,7 +105,7 @@ openPaiementModal(facture: any) {
   this.showPaiementModal = true;
 }
 confirmPaiement() {
-  const url = `http://localhost:8080/api/factures/${this.currentFactureID}/payer`;
+  const url = `${this.apiUrl}/factures/${this.currentFactureID}/payer`;
   const body = {
     notePaiement: this.notePaiement,
     devise: this.selectedDevise
@@ -134,7 +136,7 @@ confirmPaiement() {
 }
 
 getAllFournisseurs() {
-  this.http.get<Fournisseur[]>('http://localhost:8080/api/fournisseurs')
+  this.http.get<Fournisseur[]>(`${this.apiUrl}/fournisseurs`)
     .subscribe(fournisseurs => {
       this.fournisseurs = fournisseurs;
       console.log('Fournisseurs chargés :', this.fournisseurs); // Debug
@@ -143,7 +145,7 @@ getAllFournisseurs() {
 
 getSoldes(): void {
   this.isLoading = true;
-  this.http.get<any>('http://localhost:8080/api/paiement/getAll')
+  this.http.get<any>(`${this.apiUrl}/paiement/getAll`)
     .subscribe(
       (response) => {
         console.log("Soldes récupérés :", response);
@@ -182,7 +184,7 @@ isLoading: boolean = false;
   getAllFactures() {
   console.log("Début de la récupération des factures");
 
-  this.http.get("http://localhost:8080/api/factures/getAll")
+  this.http.get(`${this.apiUrl}/factures/getAll`)
     .subscribe((resultData: any) => {
       console.log("Factures reçues:", resultData);
 
