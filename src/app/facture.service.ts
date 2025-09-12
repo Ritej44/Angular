@@ -3,12 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Facture } from './Facture.model';
 import { Fournisseur } from './Fournisseur.model';
+import { environment } from 'src/environments/environment.staging';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FactureService {
-  private apiUrl = 'http://localhost:8080/api/factures';
+
+    private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
