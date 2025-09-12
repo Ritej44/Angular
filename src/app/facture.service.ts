@@ -3,15 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Facture } from './Facture.model';
 import { Fournisseur } from './Fournisseur.model';
-import { environment } from 'src/environments/environment.staging';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FactureService {
+  private apiUrl = 'http://localhost:8080/api/factures';
 
-    private apiUrl = environment.apiUrl;
-
+  
   constructor(private http: HttpClient) { }
 
   getFactures(): Observable<any[]> {
@@ -28,12 +27,12 @@ export class FactureService {
 
   // Factures NON PAYÉES
   getFacturesNonPayees(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/factures/non-payees`);
+    return this.http.get<any[]>(`${this.apiUrl}/non-payees`);
   }
 
   // Factures PAYÉES
   getFacturesPayees(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/factures/paye`);
+    return this.http.get<any[]>(`${this.apiUrl}/paye`);
   }
 
   // Par statut
@@ -54,8 +53,9 @@ export class FactureService {
   return this.http.post<Facture>(`${this.apiUrl}/factures/${id}/payer`, { notePaiement, devise });
 }
 
+  private apiurl = 'http://localhost:8080/api/paiement';
 updatePaiement(id: string, paiement: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/paiement/${id}`, paiement);
+    return this.http.put(`${this.apiurl}/${id}`, paiement);
   }
 
   updateFacture(id: string, facture: Facture): Observable<Facture> {
